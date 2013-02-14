@@ -17,7 +17,6 @@ import gwtscheduler.client.modules.config.AppConfiguration;
 import gwtscheduler.client.resources.Resources;
 import gwtscheduler.client.widgets.common.navigation.NavigateNextEvent;
 import gwtscheduler.client.widgets.common.navigation.NavigatePreviousEvent;
-import gwtscheduler.client.widgets.common.navigation.NavigateToEvent;
 import gwtscheduler.client.widgets.view.calendarevent.CalendarDropEvent;
 import gwtscheduler.client.widgets.view.calendarevent.CalendarDropHandler;
 import gwtscheduler.client.widgets.view.calendarevent.CalendarObjectMoveEvent;
@@ -35,10 +34,7 @@ import gwtscheduler.client.widgets.view.event.Event;
 import gwtscheduler.client.widgets.view.event.EventClickEvent;
 import gwtscheduler.client.widgets.view.event.EventClickHandler;
 import gwtscheduler.client.widgets.view.event.colors.DefaultEventColors;
-import org.goda.time.DateTime;
-import org.goda.time.DateTimeConstants;
-import org.goda.time.MutableDateTime;
-import org.goda.time.ReadableDateTime;
+import gwtscheduler.common.util.DateTime;
 
 import java.util.Date;
 
@@ -187,9 +183,9 @@ public class ViewportTests implements EntryPoint, ClickHandler {
 
           TestTask testTask = (TestTask) o;
 
-          testTask.setDurationInterval(DurationInterval.getInterval(event.getDropTimeMills(), event.getDropTimeMills() + 3600 * testTask.getDuration() * 1000));
-          dialog.setTestTask(testTask, column);
-          dialog.show();
+//          testTask.setDurationInterval(DurationInterval.getInterval(event.getDropTimeMills(), event.getDropTimeMills() + 3600 * testTask.getDuration() * 1000));
+//          dialog.setTestTask(testTask, column);
+//          dialog.show();
         }
       }
     });
@@ -272,14 +268,12 @@ public class ViewportTests implements EntryPoint, ClickHandler {
 //    eventBus.fireEvent(new NavigateToEvent(getCurrentDate()));
   }
 
-  protected ReadableDateTime getCurrentDate() {
-    MutableDateTime start = new MutableDateTime();
-    start.setHourOfDay(0);
-    start.setMinuteOfHour(0);
-    start.setMinuteOfHour(0);
-    start.setMillisOfSecond(0);
-    DateTime date = start.toDateTime();
-    return date;
+  protected DateTime getCurrentDate() {
+    DateTime start = new DateTime();
+    start.setHours(0);
+    start.setMinutes(0);
+    start.setSeconds(0);
+    return start;
   }
 
   public void onClick(ClickEvent event) {
@@ -289,7 +283,7 @@ public class ViewportTests implements EntryPoint, ClickHandler {
     } else if (event.getSource() == forward) {
       eventBus.fireEvent(new NavigateNextEvent());
     } else if (event.getSource() == today) {
-      eventBus.fireEvent(new NavigateToEvent(getCurrentDate()));
+//      eventBus.fireEvent(new NavigateToEvent(getCurrentDate()));
     } else if (event.getSource() == deleteColumn) {
       CalendarColumn column = new TestTeamCalendarColumnProvider.TeamColumn(textBox.getText());
       main.deleteColumn(column);
@@ -313,7 +307,8 @@ public class ViewportTests implements EntryPoint, ClickHandler {
 
     @Override
     public int startDayOfWeek() {
-      return DateTimeConstants.MONDAY;
+//      return DateTimeConstants.MONDAY;
+      return 1;
     }
 
     @Override
