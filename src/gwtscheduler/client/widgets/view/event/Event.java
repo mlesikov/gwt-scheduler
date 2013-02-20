@@ -1,6 +1,6 @@
 package gwtscheduler.client.widgets.view.event;
 
-import gwtscheduler.common.util.Interval;
+import gwtscheduler.common.util.Period;
 
 /**
  * Event represents a single Event item in the calendar.
@@ -14,14 +14,14 @@ public interface Event {
    * Gets the interval of that event.
    * @return the interval value which indicates start/end and date of the current event
    */
-  DurationInterval getDurationInterval();
+  Period getDurationInterval();
 
   /**
    * Sets a new interval for the current event.
    *
    * @param interval the new interval to be set
    */
-  void setDurationInterval(Interval interval);
+  void setDurationInterval(Period interval);
 
   /**
    * Gets the event title.

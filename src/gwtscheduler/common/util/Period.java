@@ -1,27 +1,37 @@
 package gwtscheduler.common.util;
 
 
+import com.google.gwt.user.datepicker.client.CalendarUtil;
+
 /**
  * @author Miroslav Genov (mgenov@gmail.com)
  */
 public class Period {
-  public Period(int hours, int minutes, int seconds, int milliseconds) {
+  private DateTime start;
+  private DateTime end;
 
+  public Period(DateTime start, DateTime end) {
+    this.start = start;
+    this.end = end;
   }
 
-  public Period(int count, PeriodType days) {
-
+  public DateTime getStart() {
+    return start;
   }
 
-  public Duration toStandardDuration() {
+  public DateTime getEnd() {
+    return end;
+  }
 
-//    long millis = getMillis();  // no overflow can happen, even with Integer.MAX_VALUEs
-//    millis += (((long) getSeconds()) * ((long) DateTimeConstants.MILLIS_PER_SECOND));
-//    millis += (((long) getMinutes()) * ((long) DateTimeConstants.MILLIS_PER_MINUTE));
-//    millis += (((long) getHours()) * ((long) DateTimeConstants.MILLIS_PER_HOUR));
-//    millis += (((long) getDays()) * ((long) DateTimeConstants.MILLIS_PER_DAY));
-//    millis += (((long) getWeeks()) * ((long) DateTimeConstants.MILLIS_PER_WEEK));
-//    return new Duration(millis);
-      return null;
+  public long getStartMillis() {
+    return start.getMillis();
+  }
+
+  public long getEndMillis() {
+    return end.getMillis();
+  }
+
+  public int getDays() {
+    return CalendarUtil.getDaysBetween(start.asDate(),end.asDate());
   }
 }

@@ -7,7 +7,7 @@ package gwtscheduler.common.util;
 import java.util.Date;
 
 @SuppressWarnings({"deprecation"})
-public class DateHelper {
+class DateHelper {
     /**
      * number of days per month
      */
@@ -15,7 +15,7 @@ public class DateHelper {
     /**
      * weekedn days (Sunday and Saturday)
      */
-    public static final int[] WEEK_END_DAYS = {0, 6};
+    private static final int[] WEEK_END_DAYS = {0, 6};
 
     /**
      * a date to operate with
@@ -40,25 +40,27 @@ public class DateHelper {
      * Creates an instance of this class.
      *
      * @param year    is a year number.
-     * @param month   is a month number (from 0 to 11).
+     * @param month   is a month number (from 1 to 12).
      * @param day     is a day number.
      * @param hours   is a hours number (from 0 to 23).
      * @param minutes is a minutes number.
      * @param seconds is a seconds number.
      */
     public DateHelper(int year, int month, int day, int hours, int minutes, int seconds) {
-        this(new Date(year - 1900, month, day, hours, minutes, seconds));
+        this(new Date(year - 1900, month - 1, day, hours, minutes, seconds));
     }
 
     /**
      * This method gets a week day number.<p>
      * Usually a week starts from Sunday (0), but in some localizations it can start from Monday. In this case
-     * all numbers will be shifted, i.e. Monday (0), Tuesday (1),..., Sunday (6).
+     * was all numbers will be shifted, i.e. Monday (0), Tuesday (1),..., Sunday (6).
+     * all numbers will be shifted, i.e. Monday (1), Tuesday (2),..., Sunday (7).
      *
      * @return a number of week day.
      */
     public int getDayOfWeek() {
-        int day = date.getDay() - firstDayOfWeek;
+//was        int day = date.getDay() - firstDayOfWeek;
+        int day = date.getDay() ;
         if (day < 0)
             day = 7 + day;
         return day;
@@ -79,7 +81,7 @@ public class DateHelper {
      * @return a month number.
      */
     public int getMonth() {
-        return date.getMonth();
+        return date.getMonth() + 1;
     }
 
     /**
@@ -124,7 +126,7 @@ public class DateHelper {
      * @return a number of days.
      */
     public int getNumberOfDaysInMonth() {
-        if ((getMonth() == 1) && ((getYear() % 400 == 0) ||
+        if ((getMonth() == 2) && ((getYear() % 400 == 0) ||
                 ((getYear() % 100 != 0) && (getYear() % 4 == 0))))
             return 29;
         else
@@ -139,6 +141,15 @@ public class DateHelper {
      */
     public Date trim() {
         return new Date(date.getYear(), date.getMonth(), date.getDate());
+    }
+  
+  /**
+     * This method cuts time data from the date.
+     *
+     * @return the resulting date.
+     */
+    public Date trimToEnd() {
+      return new Date(date.getYear(), date.getMonth(), date.getDate(), 23, 59, 59);
     }
 
     /**

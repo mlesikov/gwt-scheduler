@@ -3,8 +3,7 @@ package gwtscheduler.client.widgets.common.navigation;
 
 import gwtscheduler.common.calendar.IntervalType;
 import gwtscheduler.common.util.DateTime;
-import gwtscheduler.common.util.Instant;
-import gwtscheduler.common.util.Interval;
+import gwtscheduler.common.util.Period;
 
 /**
  * Defines event controller operations.
@@ -49,9 +48,9 @@ public interface DateGenerator {
    * Creates a new time period.
    * @return the time period
    */
-  Interval interval();
+  Period interval();
 
-  Interval currentInterval();
+  Period currentInterval();
 
 
   /**
@@ -70,9 +69,9 @@ public interface DateGenerator {
    * @param  rowsCount teh rows count
    * @return the time interval
    */
-  Interval getIntervalForRange(int[] start, int[] end, int rowsCount);
+  Period getIntervalForRange(int[] start, int[] end, int rowsCount);
 
-  Interval getIntervalForDate(DateTime date);
+  Period getIntervalForDate(DateTime date);
 
-  int getRowForInstant(Instant time, int rowsCount);
+  int getRowForInstant(DateTime time, int rowsCount);
 }
