@@ -3,6 +3,8 @@ package gwtscheduler.common.util;
 
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 
+import java.util.Date;
+
 /**
  * @author Miroslav Genov (mgenov@gmail.com)
  */
@@ -13,6 +15,11 @@ public class Period {
   public Period(DateTime start, DateTime end) {
     this.start = start;
     this.end = end;
+  }
+
+  public Period(Date start, Date end) {
+    this.start = new DateTime(start);
+    this.end = new DateTime(end);
   }
 
   public DateTime getStart() {
